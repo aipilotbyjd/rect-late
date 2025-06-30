@@ -152,7 +152,7 @@ function WorkflowsPage() {
                 onItemClick={setActiveMenuItem}
             />
 
-            <div className='container mx-auto px-4'>
+            <div className='container-fluid mx-auto px-4'>
                 {/* Main Content */}
                 <div className="flex flex-col min-w-0">
                     {/* Header */}
@@ -220,12 +220,6 @@ function WorkflowsPage() {
                     </div>
                 </div>
             </div>
-
-            {/* Right Panel */}
-            <RightPanel
-                isOpen={isPanelOpen}
-                onClose={() => setIsPanelOpen(false)}
-            />
         </div>
     );
 }
