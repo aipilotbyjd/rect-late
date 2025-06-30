@@ -145,77 +145,79 @@ function WorkflowsPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 font-['Inter'] grid grid-cols-[64px,1fr,auto]">
+        <div className="min-h-screen bg-gray-50 font-['Inter'] grid grid-cols-[80px,1fr,auto]">
             {/* Sidebar */}
             <Sidebar
                 activeItem={activeMenuItem}
                 onItemClick={setActiveMenuItem}
             />
 
-            {/* Main Content */}
-            <div className="flex flex-col min-w-0">
-                {/* Header */}
-                <Header
-                    onNewWorkflow={handleNewWorkflow}
-                    searchQuery={searchQuery}
-                    onSearchChange={setSearchQuery}
-                />
+            <div className='container mx-auto px-4'>
+                {/* Main Content */}
+                <div className="flex flex-col min-w-0">
+                    {/* Header */}
+                    <Header
+                        onNewWorkflow={handleNewWorkflow}
+                        searchQuery={searchQuery}
+                        onSearchChange={setSearchQuery}
+                    />
 
-                {/* Filter Bar */}
-                <FilterBar
-                    selectedFilters={selectedFilters}
-                    onFilterChange={handleFilterChange}
-                    sortBy={sortBy}
-                    onSortChange={setSortBy}
-                    viewMode={viewMode}
-                    onViewModeChange={setViewMode}
-                    selectedCount={selectedWorkflows.length}
-                />
+                    {/* Filter Bar */}
+                    <FilterBar
+                        selectedFilters={selectedFilters}
+                        onFilterChange={handleFilterChange}
+                        sortBy={sortBy}
+                        onSortChange={setSortBy}
+                        viewMode={viewMode}
+                        onViewModeChange={setViewMode}
+                        selectedCount={selectedWorkflows.length}
+                    />
 
-                {/* Workflows Grid */}
-                <div className="flex-1 p-6">
-                    {filteredWorkflows.length === 0 ? (
-                        <div className="text-center py-12">
-                            <div className="text-gray-400 mb-4">
-                                <BarChart3 className="w-12 h-12 mx-auto" />
+                    {/* Workflows Grid */}
+                    <div className="flex-1 p-6">
+                        {filteredWorkflows.length === 0 ? (
+                            <div className="text-center py-12">
+                                <div className="text-gray-400 mb-4">
+                                    <BarChart3 className="w-12 h-12 mx-auto" />
+                                </div>
+                                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                                    No workflows found
+                                </h3>
+                                <p className="text-gray-500 mb-6">
+                                    {searchQuery || Object.values(selectedFilters).some(arr => arr.length > 0)
+                                        ? "Try adjusting your search or filters"
+                                        : "Get started by creating your first workflow"
+                                    }
+                                </p>
+                                {!searchQuery && Object.values(selectedFilters).every(arr => arr.length === 0) && (
+                                    <button
+                                        onClick={handleNewWorkflow}
+                                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-150"
+                                    >
+                                        Create Workflow
+                                    </button>
+                                )}
                             </div>
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">
-                                No workflows found
-                            </h3>
-                            <p className="text-gray-500 mb-6">
-                                {searchQuery || Object.values(selectedFilters).some(arr => arr.length > 0)
-                                    ? "Try adjusting your search or filters"
-                                    : "Get started by creating your first workflow"
+                        ) : (
+                            <div className={`
+                grid gap-4 
+                ${viewMode === 'grid'
+                                    ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                                    : 'grid-cols-1'
                                 }
-                            </p>
-                            {!searchQuery && Object.values(selectedFilters).every(arr => arr.length === 0) && (
-                                <button
-                                    onClick={handleNewWorkflow}
-                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-150"
-                                >
-                                    Create Workflow
-                                </button>
-                            )}
-                        </div>
-                    ) : (
-                        <div className={`
-              grid gap-4 
-              ${viewMode === 'grid'
-                                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-                                : 'grid-cols-1'
-                            }
             `}>
-                            {filteredWorkflows.map((workflow) => (
-                                <WorkflowCard
-                                    key={workflow.id}
-                                    workflow={workflow}
-                                    isSelected={selectedWorkflows.includes(workflow.id)}
-                                    onSelect={handleWorkflowSelect}
-                                    onAction={handleWorkflowAction}
-                                />
-                            ))}
-                        </div>
-                    )}
+                                {filteredWorkflows.map((workflow) => (
+                                    <WorkflowCard
+                                        key={workflow.id}
+                                        workflow={workflow}
+                                        isSelected={selectedWorkflows.includes(workflow.id)}
+                                        onSelect={handleWorkflowSelect}
+                                        onAction={handleWorkflowAction}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
 
