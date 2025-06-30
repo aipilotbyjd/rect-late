@@ -71,8 +71,8 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
         bg-white border rounded-lg p-4 cursor-pointer transition-all duration-150
         hover:shadow-sm
         ${isSelected
-          ? 'border-blue-500 ring-1 ring-blue-500'
-          : 'border-gray-200 hover:border-gray-300'
+          ? 'border-blue-500 bg-gradient-to-r from-blue-100 to-white shadow-lg'
+          : 'border-gray-200 hover:border-blue-300 hover:shadow-lg'
         }
       `}
       onClick={() => onSelect(workflow.id)}

@@ -60,7 +60,7 @@ export const RightPanel: React.FC<RightPanelProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="w-80 bg-white border-l border-gray-200 flex flex-col">
+    <div className="w-80 bg-gradient-to-b from-white to-slate-50 border-l border-gray-200 flex flex-col">
       <div className="p-6">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-gray-800">Dashboard</h2>
